@@ -8,7 +8,7 @@ permalink: /commands/
 
 # 命令与权限
 
-主命令 **`/indra`**，别名 **`/ind``**。所有子命令需要 **`indra.admin`** 权限（OP 默认拥有）。
+主命令 **`/indra`**，别名 **`/ind`**。所有子命令需要 **`indra.admin`** 权限（OP 默认拥有）。
 
 > 💡 想把部分功能开放给普通玩家（例如 `/indra menu`），用 LuckPerms 等权限插件授予 `indra.admin` 即可。
 
