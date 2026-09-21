@@ -1,8 +1,22 @@
-# Indra 文档索引
+---
+title: 文档索引
+layout: default
+permalink: /docs-index/
+---
 
-| 文档 | 内容 |
-|---|---|
-| [../README.md](../README.md) | 项目总览：环境要求、构建、存储切换、指令权限、模块清单 |
-| [功能清单.md](功能清单.md) | 功能开发路线图（A1-A8 / B1-B4）、实机验证清单、优先级推进 |
-| [TabooLib-6.3-开发实战指南.md](TabooLib-6.3-开发实战指南.md) | TabooLib 6.3 + Kotlin 开发实战：生命周期与注解、命令 DSL、菜单 UI（字符槽位模型）、**「插件静默失败」根因模型**、官方构建管线恢复配方、Paper 26.3 / Java 25 踩坑全记录 |
-| [patch/Plugin.java](patch/Plugin.java) | 幂等版 `Plugin.setInstance` 附录（针对"重复注册同一实例"场景，见指南 8.6/8.9） |
+# 文档索引
+
+**功能文档**（面向使用者）：
+
+- [首页](index.md) — 项目简介与模块总览
+- [安装与快速上手](install.md)
+- [命令与权限](commands.md)
+- [配置参考（config.yml）](config.md)
+- [存储切换（SQLite / MySQL）](storage.md)
+- 模块：[刷怪控制](spawn.md) · [怪物等级](moblevel.md) · [玩家成长](player.md) · [聊天格式](chat.md) · [封禁系统](ban.md) · [出售系统](sell.md) · [面板](menu.md)
+
+**开发者文档**：
+
+- [功能清单与实机验证](功能清单.md)
+- [TabooLib 6.3 开发实战指南](TabooLib-6.3-开发实战指南.md)（含静默失败根因模型与官方管线配方）
+- [幂等补丁附录](patch/Plugin.java)

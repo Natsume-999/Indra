@@ -1,3 +1,9 @@
+---
+title: 开发者 · TabooLib 6.3 开发实战指南
+layout: default
+permalink: /dev-guide/
+---
+
 > 📌 本文是 Indra 开发过程的完整技术沉淀：TabooLib 6.3 + Kotlin 插件的开发实战指南，
 > 含「插件静默失败」全链路根因模型、官方构建管线恢复配方（8.9 节）、以及 Paper 26.3 / Java 25
 > 的全部踩坑记录。文中 `analysis\` 路径指作者本地工作区，开源读者请按机制与配方自行套用。
