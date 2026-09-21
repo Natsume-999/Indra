@@ -1,0 +1,292 @@
+# ═══════════════════════════════════════════════════════════
+#  Indra —— 面板外观配置
+#  ------------------------------------------------------------------
+#  本文件只管「外观」：标题、行列数、材质、文案。
+#  玩法数值（等级、经验、生成控制）在 config.yml。
+#  修改后执行 /indra reload 即可生效（本文件开启了 autoReload）。
+#
+#  ── 材质怎么写 ──
+#    写 Bukkit 材质名（全大写），例如 STONE / DIAMOND / PLAYER_HEAD。
+#    Indra 使用 XMaterial 解析，老版本材质名（如 SKULL_ITEM）也能识别。
+#    写错不会导致面板打不开 —— 会自动退回石头并在控制台提示一次。
+#
+#  ── 颜色怎么写 ──
+#    用 & 号传统色码（&a &c &l 等）。十六进制请用 &x&f&f&0&0&0&0 形式。
+#
+#  ── 可用占位符 ──
+#    {player}   当前玩家名
+#    其余占位符（{level} {exp} 等）在各面板内部填充，写不写都不会报错。
+# ═══════════════════════════════════════════════════════════
+
+menus:
+
+  # ─────────────────────────────────────────────────────────
+  #  主菜单  /indra menu
+  # ─────────────────────────────────────────────────────────
+  main:
+    # 是否启用该面板（false = 打开时提示已禁用）
+    enabled: true
+    # 是否记录面板开关审计到控制台
+    audit: true
+    title: "&8Indra 主菜单"
+    rows: 6
+    # 底板材质：所有未被内容占用的空槽会铺满它
+    filler-material: "GRAY_STAINED_GLASS_PANE"
+
+    # 顶部信息条
+    info-slot: 4
+    info-material: "NETHER_STAR"
+    info-name: "&b&lIndra &7RPG 系统"
+
+    buttons:
+      player:
+        slot: 13
+        material: "PLAYER_HEAD"
+        name: "&b我的信息"
+        lore:
+          - "&7等级：&eLv.{level}"
+          - "&7经验：&e{exp} &8/ &7{expNext}"
+          - "&7击杀 / 死亡：&a{kills} &8/ &c{deaths}"
+          - "&7可用点数：&e{points}"
+          - ""
+          - "&8点击查看详情"
+      top:
+        slot: 28
+        material: "GOLDEN_HELMET"
+        name: "&6等级排行榜"
+        lore:
+          - "&7查看服务器等级前 50 名"
+          - "&7支持升序 / 降序切换"
+          - ""
+          - "&8点击查看"
+      ban:
+        slot: 30
+        material: "IRON_DOOR"
+        name: "&c封禁管理"
+        lore:
+          - "&7封禁名单 / 解封 / 警告"
+          - "&7支持搜索与排序"
+          - ""
+          - "&8点击管理"
+      admin:
+        slot: 32
+        material: "COMMAND_BLOCK"
+        name: "&e管理工具"
+        lore:
+          - "&7运行状态 / 模块列表"
+          - "&7存储信息 / 手动重载"
+          - ""
+          - "&8点击查看"
+      beacon:
+        slot: 34
+        material: "BEACON"
+        name: "&7信标设置 &8(未启用)"
+        lore:
+          - "&8功能开发中（见 docs/功能清单.md A4）"
+          - "&8当前版本暂不可用"
+
+  # ─────────────────────────────────────────────────────────
+  #  玩家信息面板
+  # ─────────────────────────────────────────────────────────
+  player:
+    enabled: true
+    audit: false
+    title: "&8玩家信息 &7- &f{player}"
+    rows: 5
+    filler-material: "GRAY_STAINED_GLASS_PANE"
+
+    head:
+      material: "PLAYER_HEAD"
+      name: "&b{player}"
+      lore:
+        - "&7状态：{status}"
+        - "&7等级：&eLv.{level} &8/ &7{maxLevel}"
+        - "&7经验：&e{exp} &8/ &7{expNext}"
+        - "&7总经验：&e{expTotal}"
+        - "&7击杀数：&a{kills}"
+        - "&7死亡数：&c{deaths}"
+        - "&7可用点数：&e{points}"
+        - "&7首次进入：&f{firstJoin}"
+        - "&7最后在线：&f{lastSeen}"
+        - ""
+        - "&8UUID: &7{uuid}"
+
+    progress:
+      material: "EXPERIENCE_BOTTLE"
+      name: "&e升级进度 &f{pct}%"
+
+    ban:
+      banned-material: "REDSTONE_BLOCK"
+      banned-name: "&c已封禁"
+      normal-material: "EMERALD_BLOCK"
+      normal-name: "&a状态正常"
+
+    banview:
+      material: "IRON_DOOR"
+      name: "&c在封禁管理中查看"
+
+    offline:
+      name: "&7玩家离线"
+
+    # 导航键（返回键所有面板通用）
+    nav:
+      back-material: "ARROW"
+      back-name: "&7← 返回"
+
+  # ─────────────────────────────────────────────────────────
+  #  等级排行榜
+  # ─────────────────────────────────────────────────────────
+  top:
+    enabled: true
+    audit: false
+    title: "&8等级排行榜"
+    rows: 6
+    filler-material: "GRAY_STAINED_GLASS_PANE"
+    # 最多展示多少名（与指令 /indra top 的上限一致）
+    max-entries: 50
+
+    entry:
+      material: "PAPER"
+      material-1: "GOLD_BLOCK"
+      material-2: "IRON_BLOCK"
+      material-3: "COPPER_BLOCK"
+      name: "&f#{rank} &e{player}"
+      lore:
+        - "&7等级：&eLv.{level} &8/ &7{maxLevel}"
+        - "&7总经验：&e{expTotal}"
+        - "&7击杀 / 死亡：&a{kills} &8/ &c{deaths}"
+        - "&7最后在线：&f{lastSeen}"
+        - ""
+        - "&8点击查看该玩家详情"
+
+    empty:
+      name: "&7暂无排行数据"
+
+    nav:
+      back-material: "ARROW"
+      back-name: "&7← 返回"
+      prev-material: "PAPER"
+      prev-name: "&e← 上一页"
+      next-material: "PAPER"
+      next-name: "&e下一页 →"
+      sort-material: "HOPPER"
+      sort-name: "&e切换排序"
+      search-material: "OAK_SIGN"
+      search-name: "&e搜索玩家"
+      stat-material: "BOOK"
+      stat-name: "&b统计"
+
+  # ─────────────────────────────────────────────────────────
+  #  封禁管理面板（唯一带写操作的面板）
+  # ─────────────────────────────────────────────────────────
+  ban:
+    enabled: true
+    audit: true
+    title: "&8封禁管理"
+    rows: 6
+    filler-material: "BLACK_STAINED_GLASS_PANE"
+    max-entries: 200
+
+    entry:
+      material: "SKELETON_SKULL"
+      name: "&c{player}"
+      lore:
+        - "&7原因：&f{reason}"
+        - "&7时长：&f{duration}"
+        - "&7封禁于：&f{banTime}"
+        - "&7解封于：&f{unbanTime}"
+        - "&7操作员：&f{admin}"
+        - ""
+        - "&8点击选择该玩家"
+
+    selected:
+      material: "PLAYER_HEAD"
+
+    hint:
+      material: "PAPER"
+      name: "&7请先选择一个玩家"
+
+    empty:
+      name: "&a当前没有封禁记录"
+
+    actions:
+      unban:
+        material: "EMERALD"
+        name: "&a解封"
+      warn:
+        material: "PAPER"
+        name: "&6追加警告"
+      delete:
+        material: "TNT"
+        name: "&c&l清除记录"
+      detail:
+        material: "BOOK"
+        name: "&b查看详情"
+
+    nav:
+      back-material: "ARROW"
+      back-name: "&7← 返回"
+      prev-material: "PAPER"
+      prev-name: "&e← 上一页"
+      next-material: "PAPER"
+      next-name: "&e下一页 →"
+      search-material: "OAK_SIGN"
+      search-name: "&e搜索"
+      sort-material: "HOPPER"
+      sort-name: "&e排序"
+      reload-material: "CLOCK"
+      reload-name: "&b刷新列表"
+
+  # ─────────────────────────────────────────────────────────
+  #  管理工具（需要 indra.admin）
+  # ─────────────────────────────────────────────────────────
+  admin:
+    enabled: true
+    audit: true
+    title: "&8管理工具"
+    rows: 5
+    filler-material: "GRAY_STAINED_GLASS_PANE"
+
+    status:
+      material: "NETHER_STAR"
+      name: "&b&l服务器状态"
+    modules:
+      material: "BOOKSHELF"
+      name: "&a已加载模块"
+    params:
+      material: "COMPARATOR"
+      name: "&e核心参数"
+    reload:
+      material: "REDSTONE_TORCH"
+      name: "&e重载配置"
+    diag:
+      material: "SPYGLASS"
+      name: "&b面板自检"
+    top:
+      material: "GOLDEN_HELMET"
+      name: "&6打开排行榜"
+
+    nav:
+      back-material: "ARROW"
+      back-name: "&7← 返回"
+
+  # ─────────────────────────────────────────────────────────
+  #  信标设置（A4 未开发，占位说明页）
+  # ─────────────────────────────────────────────────────────
+  beacon:
+    enabled: true
+    audit: false
+    title: "&8信标设置 &7(未启用)"
+    rows: 5
+    filler-material: "GRAY_STAINED_GLASS_PANE"
+
+    placeholder:
+      material: "BEACON"
+      name: "&7信标系统开发中"
+    deps:
+      material: "HOPPER"
+      name: "&e依赖状态"
+
+    nav:
+      back-material: "ARROW"
+      back-name: "&7← 返回"

@@ -1,0 +1,48 @@
+# ═══════════════════════════════════════════════════════════
+#  Indra 数据源配置
+#
+#  enable: true  → 使用 MySQL（推荐生产环境 / 多服共享）
+#  enable: false → 使用本地 SQLite（插件目录下 data.db，开箱即用）
+#
+#  两种模式的表结构完全一致，切换不需要改代码。
+# ═══════════════════════════════════════════════════════════
+
+database:
+  # 总开关：false = 本地 SQLite
+  enable: false
+
+  # 数据库类型：mysql / postgresql
+  type: mysql
+
+  # MySQL 连接信息（enable=false 时以下配置全部忽略）
+  host: 127.0.0.1
+  port: 3306
+  user: root
+  password: ""
+
+  # 数据库名，需提前建库
+  database: indra
+
+  # 表前缀
+  table-prefix: ""
+
+  # 额外连接参数
+  flags:
+    useSSL: false
+    serverTimezone: Asia/Shanghai
+    characterEncoding: utf8
+    allowPublicKeyRetrieval: true
+
+  # 连接池（HikariCP）
+  pool:
+    maximum-pool-size: 10
+    minimum-idle: 2
+    connection-timeout: 30000
+    max-lifetime: 1800000
+
+# ───────────────────────────────────────────────────────────
+#  本地 SQLite 配置（database.enable=false 时生效）
+# ───────────────────────────────────────────────────────────
+sqlite:
+  # 数据库文件名，位于插件数据目录下
+  file: data.db
