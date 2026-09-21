@@ -10,6 +10,9 @@
 
 ---
 
+> 🌐 **在线文档网站**：<https://natsume-999.github.io/Indra/>
+
+
 ## 📢 2026-09-21 重大更新：已切换完整官方构建管线
 
 本模板此前因「TabooLib 内置 ASM 读不了 Java 25 字节码」而采用自建后处理
@@ -29,7 +32,7 @@
 
 ## 📚 文档
 
-**🌐 在线功能文档（GitHub Pages）**：https://natsume-999.github.io/Indra/
+**🌐 [在线功能文档网站（GitHub Pages）](https://natsume-999.github.io/Indra/)** —— 安装步骤、全配置参考、命令权限、8 大模块功能详解
 
 —— 安装步骤、全配置参考、命令权限、8 大模块功能详解，全都有。
 
